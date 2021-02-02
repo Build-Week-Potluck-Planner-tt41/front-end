@@ -5,6 +5,12 @@ import AddPotLuck from './components/addPotLuck'
 import {Route} from 'react-router-dom'
 import './App.css';
 
+import SignUpForm from './components/signUpForm';
+
+import LoginForm from './components/LoginForm'
+
+
+
 function App() {
 
   const getPotLuck = () =>{
@@ -24,6 +30,7 @@ function App() {
   
   return (
     <div className="App">
+
       <Route path ='/Home'>
         <HomePage /> </Route>
 
@@ -33,6 +40,11 @@ function App() {
         }}>
       </Route>
 
+
+
+      <SignUpForm />
+
+   <LoginForm />
 
     </div>
   );
