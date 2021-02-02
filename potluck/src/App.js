@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React,{useEffect} from 'react'
+import HomePage from './components/HomePage'
+import {axiosWithAuth} from './utils/axioswithauth'
+import AddPotLuck from './components/addPotLuck'
+import {Route} from 'react-router-dom'
 import './App.css';
 
 function App() {
+
+  const getPotLuck = () =>{
+    axiosWithAuth()
+    .get('')
+    .then((res) =>{
+      console.log('RES IN GET:', res)
+    })
+    .catch((err) =>{
+      console.log('Error In GET:',err)
+    })
+    }
+  useEffect(() =>{
+    getPotLuck()
+  },[])
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route path ='/Home'>
+        <HomePage /> </Route>
+
+      <Route path='/add-potluck' render={
+        props =>{
+          return(<AddPotLuck {...props} getPotLuck={getPotLuck}  />)
+        }}>
+      </Route>
+
+
     </div>
   );
 }
