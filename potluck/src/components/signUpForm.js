@@ -143,6 +143,7 @@ export default function SignUpForm() {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Sign Up</Button>
+                        <Link to ='/'>Home</Link>
                         <p>Already have an account? Log In here <br></br><Link to ="/login">Log In Here</Link> </p>
                     </InfoDiv>
                 </SignUpStyled>

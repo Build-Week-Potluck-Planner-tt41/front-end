@@ -90,10 +90,11 @@ export default function LoginForm(props) {
 
     return (
         <div>
+            
             <FormStyled onSubmit={userSubmit}>
-                <LoginStyled>
+                    <LoginStyled>
                     <TopDiv>
-                        <h1>Login</h1><br />
+                    <h1>Login</h1><br />
                     </TopDiv>
                     <InfoDiv>
                         <div>{formErrors.name}</div>
@@ -140,7 +141,9 @@ export default function LoginForm(props) {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Login</Button>
+                        <Link to ='/'>Home</Link>
                         <p>Dont have an account sign-up here? <br></br> <Link to ="/sign-up">Sign Up Here</Link> </p>
+                        
                     </InfoDiv>
                 </LoginStyled>
             </FormStyled>
