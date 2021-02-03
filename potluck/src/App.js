@@ -2,13 +2,10 @@ import React,{useEffect} from 'react'
 import HomePage from './components/HomePage'
 import {axiosWithAuth} from './utils/axioswithauth'
 import AddPotLuck from './components/addPotLuck'
-import {Route} from 'react-router-dom'
-import './App.css';
-
+import {Route, Switch} from 'react-router-dom'
 import SignUpForm from './components/signUpForm';
-
 import LoginForm from './components/LoginForm'
-
+import './App.css';
 
 
 function App() {
@@ -30,23 +27,17 @@ function App() {
   
   return (
     <div className="App">
-
-      <Route path ='/Home'>
-        <HomePage /> </Route>
-
+        <Switch>
+      <Route exact path ='/' component={HomePage} />
+      <Route path='/sign-up' component={SignUpForm}/> 
+      <Route path='/login' component={LoginForm}/> 
       <Route path='/add-potluck' render={
         props =>{
           return(<AddPotLuck {...props} getPotLuck={getPotLuck}  />)
         }}>
       </Route>
-
-
-
-      <SignUpForm />
-
-   <LoginForm />
-
-    </div>
+      </Switch>
+  </div>
   );
 }
 
