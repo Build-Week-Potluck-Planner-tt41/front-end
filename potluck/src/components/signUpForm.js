@@ -97,6 +97,7 @@ export default function SignUpForm() {
                 <SignUpStyled>
                     <TopDiv>
                         <h1>Sign Up</h1><br />
+                        <StyledLink to ='/'>Home</StyledLink>
                     </TopDiv>
                     <InfoDiv>
                         <div>{formErrors.name}</div>
@@ -143,8 +144,10 @@ export default function SignUpForm() {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Sign Up</Button>
-                        <Link to ='/'>Home</Link>
-                        <p>Already have an account? Log In here <br></br><Link to ="/login">Log In Here</Link> </p>
+                        <BottomCardDiv>
+                            <SendToLogin>Already have an account?&nbsp;
+                            <LoginLink to ="/login">Log In Here</LoginLink> </SendToLogin>
+                        </BottomCardDiv>
                     </InfoDiv>
                 </SignUpStyled>
             </FormStyled>
@@ -169,10 +172,12 @@ const SignUpStyled = styled.div`
     flex-direction: column;
     align-items: center;
     width: 400px;
-    height: 500px;
+    height: 550px;
     box-shadow: 0px 1px 6px -2px rgb(128, 127, 127);
     border: 1px solid rgb(210, 210, 210);
     color: #1e3d59;
+    border-radius: 25px;
+    background-color: white;
 `;
 
 const TopDiv = styled.div`
@@ -184,6 +189,9 @@ const TopDiv = styled.div`
     background-color: #1e3d59;
     color: white;
     width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-top: 15px;
 `;
 const InfoDiv = styled.div`
     flex: 3;
@@ -252,4 +260,34 @@ const Button = styled.button`
         border: 2px solid #B7C9DA;
         color: #B7C9DA;
     }
+`;
+
+const StyledLink = styled(Link)`
+    text-align: center;
+    color: #1e3d59;
+    color: white;
+    width: 100%;
+    padding: 0;
+    margin-top: -50px;
+    font-weight: 200;
+`;
+
+const BottomCardDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+`;
+
+const SendToLogin = styled.p`
+    width: 100%;
+    color: #1e3d59;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 0;
+    text-align: center;
+`;
+
+const LoginLink = styled(Link)`
+    color: #1e3d59;
 `;

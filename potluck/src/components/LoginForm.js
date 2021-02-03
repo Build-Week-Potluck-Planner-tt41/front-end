@@ -94,14 +94,15 @@ export default function LoginForm(props) {
             <FormStyled onSubmit={userSubmit}>
                     <LoginStyled>
                     <TopDiv>
-                    <h1>Login</h1><br />
+                        <h1>Login</h1><br />
+                        <StyledLink to ='/'>Home</StyledLink>
                     </TopDiv>
                     <InfoDiv>
                         <div>{formErrors.name}</div>
                         <div>{formErrors.password}</div>
                         <div>{formErrors.role}</div>
                         <InputDiv>
-                            <TextLabel>Name<br />
+                            <TextLabel>Username<br />
                             </TextLabel>
                             <TextInput
                                 type='text'
@@ -141,8 +142,10 @@ export default function LoginForm(props) {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Login</Button>
-                        <Link to ='/'>Home</Link>
-                        <p>Dont have an account sign-up here? <br></br> <Link to ="/sign-up">Sign Up Here</Link> </p>
+                        <BottomCardDiv>
+                            <SendToSignUp>Dont have an account?&nbsp;
+                            <SignUpLink to ="/sign-up">Sign Up Here</SignUpLink> </SendToSignUp>
+                        </BottomCardDiv>
                         
                     </InfoDiv>
                 </LoginStyled>
@@ -166,10 +169,12 @@ const LoginStyled = styled.div`
     flex-direction: column;
     align-items: center;
     width: 400px;
-    height: 500px;
+    height: 550px;
     box-shadow: 0px 1px 6px -2px rgb(128, 127, 127);
     border: 1px solid rgb(210, 210, 210);
     color: #1e3d59;
+    border-radius: 25px;
+    background-color: white;
 `;
 const TopDiv = styled.div`
     flex: 1;
@@ -180,6 +185,9 @@ const TopDiv = styled.div`
     background-color: #1e3d59;
     color: white;
     width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-top: 15px;
 `;
 const InfoDiv = styled.div`
     flex: 3;
@@ -242,6 +250,36 @@ const Button = styled.button`
         border: 2px solid #B7C9DA;
         color: #B7C9DA;
     }
+`;
+
+const StyledLink = styled(Link)`
+    text-align: center;
+    color: #1e3d59;
+    color: white;
+    width: 100%;
+    padding: 0;
+    margin-top: -50px;
+    font-weight: 200;
+`;
+
+const BottomCardDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+`;
+
+const SendToSignUp = styled.p`
+    width: 100%;
+    color: #1e3d59;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 0;
+    text-align: center;
+`;
+
+const SignUpLink = styled(Link)`
+    color: #1e3d59;
 `;
 
 
