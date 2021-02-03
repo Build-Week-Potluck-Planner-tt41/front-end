@@ -26,12 +26,12 @@ const AddPotLuck = (props) =>{
 
     const handleSubmit =(e) => {
         e.preventDefault()
-        axios.post('')
+        axios.post('/potlucks')
         .then((res) =>{
             console.log('res when posting:',res)
             props.getPotLuck();
             setPotLuck(initialPotLuck)
-            push('/')
+            push('/organizers')
         })
         .catch((err)=>{
             console.log('error posting Potluck:', err)

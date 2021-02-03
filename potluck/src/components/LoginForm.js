@@ -2,25 +2,30 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/schema';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
+import {axiosWithAuth} from '../utils/axioswithauth'
+import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 const initialFormValues = {
-    username:'',
+    name:'',
     password:'',
     role:''
 };
 const initialFormErrors = {
-    username:'',
+    name:'',
     password:'',
     role:''
 };
 const initialDisabled = true;
 const initialUserState = []
 
-export default function LoginForm() {
+export default function LoginForm(props) {
     const [users, setUsers] = useState(initialUserState);
     const [formValues, setFormValues] = useState(initialFormValues);
     const [formErrors, setFormErrors] = useState(initialFormErrors);
     const [disabled, setDisabled] = useState(initialDisabled);
+    const {push} =useHistory()
     // ADDING USER TO STATE W/ CALLBACK//
     // ADDING USER TO STATE W/ CALLBACK//
     const addUser = newUser => {
@@ -29,8 +34,20 @@ export default function LoginForm() {
     }
     const userSubmit = evt => {
         evt.preventDefault();
+        console.log('FORMVALUES:', formValues)
+        axios
+        .post('https://cors-anywhere.herokuapp.com/https://backend-potlucks.herokuapp.com/api/auth/login', formValues)
+        .then((res) =>{
+            console.log('RES IN POST',res)
+            localStorage.setItem('token',res.data.token)
+            setFormValues(initialFormValues)
+            push(`/${formValues.role}`)
+        })
+        .catch((err) =>{
+            console.log('err in login POST:',err.message)
+        })
         const newUser = {
-            username: formValues.username.trim(),
+            name: formValues.name.trim(),
             password: formValues.password.trim(),
             role: formValues.role,
         }
@@ -73,22 +90,23 @@ export default function LoginForm() {
 
     return (
         <div>
+            
             <FormStyled onSubmit={userSubmit}>
-                <LoginStyled>
+                    <LoginStyled>
                     <TopDiv>
-                        <h1>Login</h1><br />
+                    <h1>Login</h1><br />
                     </TopDiv>
                     <InfoDiv>
-                        <div>{formErrors.username}</div>
+                        <div>{formErrors.name}</div>
                         <div>{formErrors.password}</div>
                         <div>{formErrors.role}</div>
                         <InputDiv>
-                            <TextLabel>Username<br />
+                            <TextLabel>Name<br />
                             </TextLabel>
                             <TextInput
                                 type='text'
-                                name='username'
-                                value={formValues.username}
+                                name='name'
+                                value={formValues.name}
                                 onChange={onChange}
                             ></TextInput>
                         </InputDiv>
@@ -123,6 +141,9 @@ export default function LoginForm() {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Login</Button>
+                        <Link to ='/'>Home</Link>
+                        <p>Dont have an account sign-up here? <br></br> <Link to ="/sign-up">Sign Up Here</Link> </p>
+                        
                     </InfoDiv>
                 </LoginStyled>
             </FormStyled>

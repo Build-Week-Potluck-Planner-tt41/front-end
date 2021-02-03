@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/signUpFormSchema';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
+import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 const initialFormValues = {
-    username: '',
+    name: '',
     password: '',
     role: '',
 };
 const initialFormErrors = {
-    username: '',
+    name: '',
     password: '',
     role: '',
 }
@@ -22,6 +25,7 @@ export default function SignUpForm() {
     const [formValues, setFormValues] = useState(initialFormValues);
     const [formErrors, setFormErrors] = useState(initialFormErrors);
     const [disabled, setDisabled] = useState(initialDisabled);
+    const {push}= useHistory()
 
 
     // ADDING USER TO STATE W/ CALLBACK//
@@ -32,8 +36,19 @@ export default function SignUpForm() {
     }
     const userSubmit = evt => {
         evt.preventDefault();
+        axios
+        .post('https://cors-anywhere.herokuapp.com/https://backend-potlucks.herokuapp.com/api/auth/sign-up', formValues)
+        .then((res) =>{
+            console.log('RES IN POST',res)
+            localStorage.setItem('token',res.data.token)
+            setFormValues(initialFormValues)
+            push('/login')
+        })
+        .catch((err) =>{
+            console.log('err in login POST:',err.message)
+        })
         const newUser = {
-            username: formValues.username.trim(),
+            username: formValues.name.trim(),
             password: formValues.password.trim(),
             role: formValues.role,
         }
@@ -84,7 +99,7 @@ export default function SignUpForm() {
                         <h1>Sign Up</h1><br />
                     </TopDiv>
                     <InfoDiv>
-                        <div>{formErrors.username}</div>
+                        <div>{formErrors.name}</div>
                         <div>{formErrors.password}</div>
                         <div>{formErrors.role}</div>
                         <InputDiv>
@@ -92,7 +107,7 @@ export default function SignUpForm() {
                             </TextLabel>
                             <TextInput
                                 type='text'
-                                name='username'
+                                name='name'
                                 value={formValues.username}
                                 onChange={onChange}
                             ></TextInput>
@@ -128,6 +143,8 @@ export default function SignUpForm() {
                             </RadioLabel>
                         </RadioDiv>
                         <Button disabled={disabled}>Sign Up</Button>
+                        <Link to ='/'>Home</Link>
+                        <p>Already have an account? Log In here <br></br><Link to ="/login">Log In Here</Link> </p>
                     </InfoDiv>
                 </SignUpStyled>
             </FormStyled>
