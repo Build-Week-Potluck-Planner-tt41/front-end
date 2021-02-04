@@ -6,6 +6,7 @@ import {Route, Switch} from 'react-router-dom'
 import SignUpForm from './components/signUpForm';
 import LoginForm from './components/LoginForm'
 import './App.css';
+import GuestDash from './components/guestDash'
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
         props =>{
           return(<AddPotLuck {...props} getPotLuck={getPotLuck}  />)
         }}>
+      </Route>
+      <Route path='/guest'>
+        <GuestDash getPotLuck={getPotLuck}/> 
       </Route>
       </Switch>
   </div>
