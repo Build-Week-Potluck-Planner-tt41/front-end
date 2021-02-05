@@ -35,7 +35,7 @@ const EditPotluck = () => {
       const handleSubmit = (e) => {
         e.preventDefault();
         axiosWithAuth()
-        .post("//NO EDIT")
+        .put("//NO EDIT")
         .then((res) => {
             console.log(res)
         })
