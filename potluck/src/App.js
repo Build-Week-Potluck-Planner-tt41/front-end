@@ -39,8 +39,7 @@ function App() {
           return(<AddPotLuck {...props} getPotLuck={getPotLuck}  />)
         }}>
       </Route>
-
-      <Route path='/guest' component={GuestDash} getPotLuck={getPotLuck}/>
+    <Route path='/guest' component={GuestDash}/>
       </Switch>
   </div>
   );

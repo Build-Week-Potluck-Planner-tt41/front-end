@@ -3,7 +3,7 @@ import {useParams, useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 const initialPotLuck ={
-    potLuck_Name:'',
+    name:'',
     location:'',
     date:'',
     time:'',
@@ -42,7 +42,7 @@ const AddPotLuck = (props) =>{
         <div className='added-potluck'>
             <form onSubmit={handleSubmit}>
             <label>Potluck Name:</label>
-            <input name='potLuckName' onChange={handleChange} type='text' value={potLuck.potLuckName} placeholder='Enter Potluck Name'></input>
+            <input name='potLuckName' onChange={handleChange} type='text' value={potLuck.name} placeholder='Enter Potluck Name'></input>
             <label>Location:</label>
             <input name='location' onChange={handleChange} type='text' value={potLuck.location} placeholder='Enter Location Here'></input>
             <label>Date:</label>
