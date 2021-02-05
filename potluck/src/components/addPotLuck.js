@@ -3,11 +3,11 @@ import {useParams, useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 const initialPotLuck ={
-    potLuckName:'',
+    potLuck_Name:'',
     location:'',
     date:'',
     time:'',
-    food:''
+    // food:''
 }
 
 const AddPotLuck = (props) =>{
@@ -26,7 +26,7 @@ const AddPotLuck = (props) =>{
 
     const handleSubmit =(e) => {
         e.preventDefault()
-        axios.post('/potlucks')
+        axios.post('/potlucks', potLuck)
         .then((res) =>{
             console.log('res when posting:',res)
             props.getPotLuck();
@@ -49,8 +49,8 @@ const AddPotLuck = (props) =>{
             <input name='date' onChange={handleChange} type='text' value={potLuck.date} placeholder='Enter Date here'></input>
             <label>Time:</label>
             <input name='time' onChange={handleChange} type='text' value={potLuck.time} placeholder='Enter Time here'></input>
-            <label>Needed Food:</label>
-            <input name='food' onChange={handleChange} type='text' value={potLuck.food} placeholder='Desired Foods Here'></input>
+            {/* <label>Needed Food:</label>
+            <input name='food' onChange={handleChange} type='text' value={potLuck.food} placeholder='Desired Foods Here'></input> */}
                 <button>Add Potluck!</button>
             </form>
         </div>

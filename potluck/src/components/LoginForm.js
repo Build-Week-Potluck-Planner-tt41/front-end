@@ -3,7 +3,6 @@ import * as yup from 'yup';
 import schema from '../validation/schema';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom'
-import {axiosWithAuth} from '../utils/axioswithauth'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 
