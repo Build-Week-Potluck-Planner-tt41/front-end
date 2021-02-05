@@ -4,14 +4,22 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import './index.css';
 import App from './App';
 
+import thunk from 'redux-thunk'
+import { applyMiddleware, createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { potluckReducer } from './reducers/potlucksReducer';
 
+
+const store = createStore(potluckReducer, applyMiddleware(thunk));
 
 
 ReactDOM.render(
 
+  <Provider store={store}>
   <Router>
   <App />
-  </Router>,
+  </Router>
+  </Provider>,
  document.getElementById('root')
   
 );

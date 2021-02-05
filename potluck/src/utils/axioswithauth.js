@@ -2,13 +2,13 @@ import axios from "axios";
 
 
 
-export const axiosWithAuth= () => {
+export const axiosWithAuth = () => {
 
-    const token=localStorage.getItem("token")
+    const token = localStorage.getItem("token")
     return axios.create({
         baseURL:"https://backend-potlucks.herokuapp.com/api",
         headers:{
-            Authorization:token
+            authorization: token
         }
     })
 }

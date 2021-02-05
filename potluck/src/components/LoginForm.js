@@ -44,6 +44,62 @@ export default function LoginForm(props) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.id);
         setFormValues(initialFormValues);
+
+    }
+    const userSubmit = evt => {
+        evt.preventDefault();
+        console.log('FORMVALUES:', formValues)
+        axios
+        .post('https://cors-anywhere.herokuapp.com/https://backend-potlucks.herokuapp.com/api/auth/login', formValues)
+        .then((res) =>{
+            console.log('RES IN POST',res)
+            localStorage.setItem('token',res.data.token)
+            // setFormValues(initialFormValues)
+            push(`/${formValues.role}`)
+        })
+        .catch((err) =>{
+            console.log('err in login POST:',err.message)
+        })
+        const newUser = {
+            name: formValues.name.trim(),
+            password: formValues.password.trim(),
+            role: formValues.role,
+        }
+        addUser(newUser)
+    }
+    // FORM CHANGE AND SUBMIT VALIDATION HANDLING //
+    // FORM CHANGE AND SUBMIT VALIDATION HANDLING //
+    const userChange = (name, value) => {
+        yup
+        .reach(schema, name)
+        .validate(value)
+        .then(() => {
+            setFormErrors({
+                ...formErrors,
+                [name]: '',
+            })
+        })
+        .catch(err => {
+            setFormErrors({
+                ...formErrors,
+                [name]: err.errors[0],
+            })
+        })
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        })
+    }
+    const onChange = evt => {
+        const {name, value} = evt.target;
+        userChange(name, value);
+    }
+    useEffect(() => {
+        schema.isValid(formValues).then(valid => {
+            setDisabled(!valid)
+        })
+    }, [formValues]);
+
         push(`/${formValues.role}`);
       })
       .catch((err) => {
@@ -88,6 +144,7 @@ export default function LoginForm(props) {
       setDisabled(!valid);
     });
   }, [formValues]);
+
 
   return (
     <div>
