@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axioswithauth";
 
 const initialPotLuck = {
@@ -10,7 +9,6 @@ const initialPotLuck = {
 
 const AddPotLuck = (props) => {
   const { push } = useHistory();
-  const { id } = useParams();
   const [food, setFood] = useState(initialPotLuck);
 
   const handleChange = (e) => {
@@ -23,7 +21,7 @@ const AddPotLuck = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //need an endpoint as a guest to post the food i want to bring and update API( please without 2 ids, its CRAZY)
-    axios
+    axiosWithAuth()
       .post("", food)
       .then((res) => {
         console.log("res when posting:", res);

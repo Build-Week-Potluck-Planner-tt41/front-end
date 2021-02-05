@@ -1,6 +1,6 @@
 import { axiosWithAuth } from "../utils/axioswithauth";
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { PotCardDiv } from "./potLuckCard";
 
 const DisplayGuestPot = () => {
