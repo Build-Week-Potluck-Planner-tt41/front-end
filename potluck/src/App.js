@@ -6,14 +6,12 @@ import { Route, Switch } from "react-router-dom";
 import SignUpForm from "./components/signUpForm";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
-
-
 import GuestDash from "./components/guestDash";
 import SearchPot from "./components/searchPot";
 import AddGuestFood from "./components/addGuestFood";
 import DisplayGuestPot from "./components/displayGuestPot";
-import OrganizerDash  from './components/organizerDash'
-import EditPotluck from './components/editPotluck'
+import OrganizerDash from "./components/organizerDash";
+import EditPotluck from "./components/editPotluck";
 
 function App() {
   const getPotLuck = () => {
@@ -52,4 +50,3 @@ function App() {
   );
 }
 export default App;
-
