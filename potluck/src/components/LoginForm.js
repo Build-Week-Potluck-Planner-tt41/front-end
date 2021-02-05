@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
 const initialFormValues = {
   name: "",
   password: "",
@@ -18,7 +17,6 @@ const initialFormErrors = {
 };
 const initialDisabled = true;
 const initialUserState = [];
-
 export default function LoginForm(props) {
   const [users, setUsers] = useState(initialUserState);
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -44,62 +42,6 @@ export default function LoginForm(props) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.id);
         setFormValues(initialFormValues);
-
-    }
-    const userSubmit = evt => {
-        evt.preventDefault();
-        console.log('FORMVALUES:', formValues)
-        axios
-        .post('https://cors-anywhere.herokuapp.com/https://backend-potlucks.herokuapp.com/api/auth/login', formValues)
-        .then((res) =>{
-            console.log('RES IN POST',res)
-            localStorage.setItem('token',res.data.token)
-            // setFormValues(initialFormValues)
-            push(`/${formValues.role}`)
-        })
-        .catch((err) =>{
-            console.log('err in login POST:',err.message)
-        })
-        const newUser = {
-            name: formValues.name.trim(),
-            password: formValues.password.trim(),
-            role: formValues.role,
-        }
-        addUser(newUser)
-    }
-    // FORM CHANGE AND SUBMIT VALIDATION HANDLING //
-    // FORM CHANGE AND SUBMIT VALIDATION HANDLING //
-    const userChange = (name, value) => {
-        yup
-        .reach(schema, name)
-        .validate(value)
-        .then(() => {
-            setFormErrors({
-                ...formErrors,
-                [name]: '',
-            })
-        })
-        .catch(err => {
-            setFormErrors({
-                ...formErrors,
-                [name]: err.errors[0],
-            })
-        })
-        setFormValues({
-            ...formValues,
-            [name]: value,
-        })
-    }
-    const onChange = evt => {
-        const {name, value} = evt.target;
-        userChange(name, value);
-    }
-    useEffect(() => {
-        schema.isValid(formValues).then(valid => {
-            setDisabled(!valid)
-        })
-    }, [formValues]);
-
         push(`/${formValues.role}`);
       })
       .catch((err) => {
@@ -144,8 +86,6 @@ export default function LoginForm(props) {
       setDisabled(!valid);
     });
   }, [formValues]);
-
-
   return (
     <div>
       <FormStyled onSubmit={userSubmit}>
@@ -218,15 +158,13 @@ export default function LoginForm(props) {
     </div>
   );
 }
-
 // STYLED COMPONENTS //
-
 const FormStyled = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Poppins", sans-serif;
-  background-color: #f5f0e1;
+  background-color: #F5F0E1;
   height: 100vh;
 `;
 const LoginStyled = styled.div`
@@ -237,7 +175,7 @@ const LoginStyled = styled.div`
   height: 550px;
   box-shadow: 0px 1px 6px -2px rgb(128, 127, 127);
   border: 1px solid rgb(210, 210, 210);
-  color: #1e3d59;
+  color: #1E3D59;
   border-radius: 25px;
   background-color: white;
 `;
@@ -247,7 +185,7 @@ const TopDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #1e3d59;
+  background-color: #1E3D59;
   color: white;
   width: 100%;
   border-top-left-radius: 25px;
@@ -276,8 +214,8 @@ const TextInput = styled.input`
   border-radius: 5px;
   width: 200px;
   height: 25px;
-  background-color: #fee5b0;
-  border: 2px solid #e4b34a;
+  background-color: #FEE5B0;
+  border: 2px solid #E4B34A;
 `;
 const RadioDiv = styled.div`
   display: flex;
@@ -285,7 +223,7 @@ const RadioDiv = styled.div`
 `;
 const RadioLabel = styled.label`
   font-weight: 500;
-  border: 2px solid #1e3d59;
+  border: 2px solid #1E3D59;
   border-radius: 5px;
   padding: 5px;
   display: flex;
@@ -293,13 +231,13 @@ const RadioLabel = styled.label`
   margin: 10px 0 20px 0;
   width: 40%;
   justify-content: center;
-  background-color: #1e3d59;
+  background-color: #1E3D59;
   color: white;
 `;
 const Radio = styled.input`
   height: 15px;
   width: 15px;
-  color: #1e3d59;
+  color: #1E3D59;
 `;
 const Button = styled.button`
   width: 50%;
@@ -307,42 +245,38 @@ const Button = styled.button`
   height: 50px;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1e3d59;
+  color: #1E3D59;
   border-radius: 10px;
   border-style: none;
-  border: 2px solid #1e3d59;
+  border: 2px solid #1E3D59;
   &:disabled {
-    border: 2px solid #b7c9da;
-    color: #b7c9da;
+    border: 2px solid #B7C9DA;
+    color: #B7C9DA;
   }
 `;
-
 const StyledLink = styled(Link)`
   text-align: center;
-  color: #1e3d59;
+  color: #1E3D59;
   color: white;
   width: 100%;
   padding: 0;
   margin-top: -50px;
   font-weight: 200;
 `;
-
 const BottomCardDiv = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
 `;
-
 const SendToSignUp = styled.p`
   width: 100%;
-  color: #1e3d59;
+  color: #1E3D59;
   font-weight: 600;
   margin-top: 30px;
   margin-bottom: 0;
   text-align: center;
 `;
-
 const SignUpLink = styled(Link)`
-  color: #1e3d59;
-`;
+  color: #1E3D59;
+`
