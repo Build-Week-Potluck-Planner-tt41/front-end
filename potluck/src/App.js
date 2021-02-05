@@ -1,11 +1,13 @@
 import React,{useEffect} from 'react'
-import HomePage from './components/HomePage'
+import HomePage from './components/homePage'
 import {axiosWithAuth} from './utils/axioswithauth'
 import AddPotLuck from './components/addPotLuck'
 import {Route, Switch} from 'react-router-dom'
 import SignUpForm from './components/signUpForm';
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/loginForm'
 import './App.css';
+import OrganizerDash  from './components/organizerDash'
+import EditPotluck from './components/editPotluck'
 
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
     })
     }
   useEffect(() =>{
-    getPotLuck()
+    // getPotLuck()
   },[])
 
   
@@ -35,7 +37,9 @@ function App() {
         props =>{
           return(<AddPotLuck {...props} getPotLuck={getPotLuck}  />)
         }}>
-      </Route>
+      </Route>  
+      <Route path="/organizer" component={OrganizerDash} />
+      <Route path="/edit-potluck" component={EditPotluck} />
       </Switch>
   </div>
   );

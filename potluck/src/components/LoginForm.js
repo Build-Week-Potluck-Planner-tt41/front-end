@@ -40,7 +40,7 @@ export default function LoginForm(props) {
         .then((res) =>{
             console.log('RES IN POST',res)
             localStorage.setItem('token',res.data.token)
-            setFormValues(initialFormValues)
+            // setFormValues(initialFormValues)
             push(`/${formValues.role}`)
         })
         .catch((err) =>{
