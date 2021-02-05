@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react'
-import PotLuckCard from './potLuckCard'
+import {PotCardDiv} from './potLuckCard'
 import {axiosWithAuth} from '../utils/axioswithauth'
+import {Link} from 'react-router-dom'
 
 
 const initialValue = {
@@ -31,6 +32,7 @@ const SearchPot = ({potLuck}) =>{
     },[])
 
     const onChange=(e) =>{
+        e.persist()
         setFormValues({
             [e.target.name]: e.target.value
         })
@@ -44,6 +46,7 @@ const SearchPot = ({potLuck}) =>{
 
     return(
         <div className='search-container'>
+            <Link to ='/guest'>Back to Guest Dash</Link>
             <form onSubmit={onSubmit}> 
                     <input type='text' name='name' value={formValues.potluck_name} onChange={onChange} placeholder='Search Potlucks'></input>
                     <button type='submit'>Search</button>
@@ -51,12 +54,12 @@ const SearchPot = ({potLuck}) =>{
             <div className='fetched-potluck'>
                 {searchResults.map(res => {
                if(res.potluck_name === formValues.name){
-                   return <div> 
+                   return <PotCardDiv> 
                     <h3>Potluck Name:<br></br>{res.potluck_name}</h3>
                         <h3>Date:{res.date}</h3>
                         <h3>Location:{res.location}</h3>
-                         <h3>Starting Time:{res.time}</h3>
-                   </div>
+                        <h3>Starting Time:{res.time}</h3>
+                   </PotCardDiv>
                }else{
                   return <div />
                }

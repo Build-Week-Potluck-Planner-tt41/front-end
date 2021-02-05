@@ -8,11 +8,13 @@ import LoginForm from './components/LoginForm'
 import './App.css';
 import GuestDash from './components/guestDash'
 import SearchPot from './components/searchPot'
+import AddGuestFood from './components/addGuestFood'
+import DisplayGuestPot from './components/displayGuestPot'
 
 
 function App() {
 
-  const getPotLuck = () =>{
+const getPotLuck = () =>{
     axiosWithAuth()
     .get('/potlucks')
     .then((res) =>{
@@ -25,7 +27,7 @@ function App() {
   useEffect(() =>{
     getPotLuck()
   },[])
-
+  
   
   return (
     <div className="App">
@@ -40,9 +42,14 @@ function App() {
         }}>
       </Route>
     <Route path='/guest' component={GuestDash}/>
+    <Route path='/add-guestfood' component={AddGuestFood} />
+    <Route path ='/display' component ={DisplayGuestPot} />
       </Switch>
   </div>
   );
 }
 
 export default App;
+
+
+

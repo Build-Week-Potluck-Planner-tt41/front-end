@@ -14,7 +14,7 @@ const PotLuckCard = ({potlucks}) =>{
     )
 }
 
-const PotCardDiv = styled.div 
+export const PotCardDiv = styled.div 
 `
 display:column;
 justify-content:center;

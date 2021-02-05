@@ -1,15 +1,17 @@
 import React,{useState, useEffect}from 'react'
 import { axiosWithAuth } from '../utils/axioswithauth'
-import { useParams, Link} from 'react-router-dom'
-import PotLuckCard from './potLuckCard'
+import { useParams, Link, useHistory} from 'react-router-dom'
+import PotLuckCard, {PotCardDiv} from './potLuckCard'
 import styled from 'styled-components'
 import SearchPot from './searchPot'
 
 function GuestDash ({getPotLuck}){
 
     const[potLuck, setPotLuck]= useState([])
+    const [user, setUser] =useState([])
     // const[confirmedGuest, setConfirmedGuest] = useState([])
     const {id} = useParams()
+    const {push} = useHistory();
 
     const fetchPotLuck = () =>{
             axiosWithAuth()
@@ -22,9 +24,38 @@ function GuestDash ({getPotLuck}){
                 console.log('ERR getting potluck:',err.message)
             })
           }
-          useEffect(() =>{
+        
+
+        const fetchGuest = () => {
+            axiosWithAuth()
+            .get('/guests/1')
+            .then((res)=>{
+                console.log('guest res:', res)
+                setUser(res.data)
+            })
+            .catch((err)=>{
+                console.log('Err in getting JONATHAN:',err)
+            })
+        }
+        useEffect(()=>{
             fetchPotLuck()
+            fetchGuest()
         },[])
+
+        const handleConfirm =() =>{
+            axiosWithAuth()
+            .post('/potlucks/1/guests/1/confirm')
+            .then((res) =>{
+                // window.alert('You have confirmed')
+                console.log('res inside of confirm:',res)
+                push('/add-guestfood')
+            })
+            .catch((err)=>{
+                console.log('error confirming guest:',err)
+                window.alert('you have been confirmed to join this potluck')
+            })
+        }
+    
 
     return(
     
@@ -33,9 +64,14 @@ function GuestDash ({getPotLuck}){
                <Link to='/searchPotLuck'>Search Potluck</Link>
             <ol>
                 {potLuck.map((potlucks) =>{
-                 return <div key={potlucks.potluck_id}>
-                       <PotLuckCard  potlucks={potlucks}/>
-                       </div>
+                 return <PotCardDiv key={potlucks.potluck_id}>
+                       <h3>Potluck Name:<br></br>{potlucks.potluck_name}</h3>
+                        <h3>Date:{potlucks.date}</h3>
+                        <h3>Location:{potlucks.location}</h3>
+                        <h3>Starting Time:{potlucks.time}</h3>
+                       <button onClick={handleConfirm}>Confirm</button>
+                       
+                       </PotCardDiv>
                 })}
             </ol>
             
